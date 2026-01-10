@@ -64,5 +64,59 @@
             runHook postInstall
           '';
         });
+
+      nixosModules.default =
+        {
+          config,
+          pkgs,
+          lib,
+          ...
+        }:
+        let
+          cfg = config.services.prism-tower;
+          prismTowerPkg = self.lib.mkPrismTower {
+            inherit pkgs;
+            services = cfg.services;
+          };
+        in
+        {
+          options.services.prism-tower = {
+            enable = lib.mkEnableOption "Prism Tower dashboard";
+
+            services = lib.mkOption {
+              description = "List of services to display in the dashboard";
+              default = [ ];
+              type = lib.types.listOf (
+                lib.types.submodule {
+                  options = {
+                    name = lib.mkOption {
+                      type = lib.types.str;
+                      example = "Jellyfin";
+                    };
+                    url = lib.mkOption {
+                      type = lib.types.str;
+                      example = "https://jellyfin.7sref";
+                    };
+                    iconUrl = lib.mkOption { type = lib.types.str; };
+                  };
+                }
+              );
+            };
+          };
+
+          config = lib.mkIf cfg.enable {
+            services.caddy.virtualHosts."prism.tower.7sref" = {
+              extraConfig = ''
+                tls {
+                  issuer internal {
+                    ca local
+                  }
+                }
+                root * ${prismTowerPkg}
+                file_server
+              '';
+            };
+          };
+        };
     };
 }
