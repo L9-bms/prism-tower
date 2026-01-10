@@ -109,7 +109,7 @@
               extraConfig = ''
                 tls {
                   issuer internal {
-                    ca local
+                    ca 7sref_ca
                   }
                 }
                 root * ${prismTowerPkg}
