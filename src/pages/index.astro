@@ -1,16 +1,30 @@
 ---
+import Background from "../components/Background.astro";
+import Clock from "../components/Clock.astro";
+import SearchBar from "../components/SearchBar.astro";
+import Services from "../components/Services.astro";
+import Character from "../components/Character.astro";
 
+import "../styles/global.css";
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Prism Tower</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="relative w-full h-screen overflow-hidden text-white">
+		<Background />
+		<div
+			class="absolute inset-0 flex flex-col items-center py-12 px-8 md:px-12 gap-12"
+		>
+			<Clock />
+			<SearchBar />
+			<Services />
+		</div>
+		<Character />
 	</body>
 </html>

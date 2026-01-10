@@ -1,0 +1,26 @@
+<astro-clock class="text-center hidden md:block">
+    <div class="text-6xl font-bold" id="time">00:00</div>
+    <div class="text-2xl font" id="date">00:00</div>
+</astro-clock>
+
+<script>
+    import dayjs from "dayjs";
+
+    class Clock extends HTMLElement {
+        connectedCallback() {
+            const timeElement = this.querySelector("#time");
+            const dateElement = this.querySelector("#date");
+
+            const updateClock = () => {
+                const now = dayjs();
+                timeElement!.textContent = now.format("HH:mm");
+                dateElement!.textContent = now.format("ddd D MMM");
+            };
+
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+    }
+
+    customElements.define("astro-clock", Clock);
+</script>
