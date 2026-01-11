@@ -98,6 +98,7 @@
                       example = "https://jellyfin.7sref";
                     };
                     iconUrl = lib.mkOption { type = lib.types.str; };
+                    category = lib.mkOption { type = lib.types.str; };
                   };
                 }
               );
