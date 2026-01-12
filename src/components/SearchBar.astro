@@ -2,7 +2,7 @@
 import Search from "./icons/search.astro";
 ---
 
-<astro-search class="w-full max-w-2xl">
+<astro-search-bar class="w-full max-w-2xl">
     <form class="relative">
         <input
             type="text"
@@ -18,10 +18,10 @@ import Search from "./icons/search.astro";
             <Search />
         </button>
     </form>
-</astro-search>
+</astro-search-bar>
 
 <script>
-    class AstroSearch extends HTMLElement {
+    class SearchBar extends HTMLElement {
         connectedCallback() {
             const searchForm = this.querySelector("form") as HTMLFormElement;
             const searchInput = this.querySelector("input") as HTMLInputElement;
@@ -36,5 +36,5 @@ import Search from "./icons/search.astro";
         }
     }
 
-    customElements.define("astro-search", AstroSearch);
+    customElements.define("astro-search-bar", SearchBar);
 </script>

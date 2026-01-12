@@ -1,0 +1,56 @@
+---
+import SpeakerMute from "./icons/speaker-mute.astro";
+import Speaker2 from "./icons/speaker2.astro";
+---
+
+<astro-music-toggle
+    class="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-10"
+>
+    <button class="frosted-glass rounded-full p-3 hover:cursor-pointer">
+        <Speaker2 id="icon-unmuted" class="hidden" />
+        <SpeakerMute id="icon-muted" />
+    </button>
+    <audio loop muted autoplay>
+        <source src="/bgm.ogg" type="audio/ogg" />
+    </audio>
+</astro-music-toggle>
+
+<script>
+    class MusicToggle extends HTMLElement {
+        connectedCallback() {
+            const button = this.querySelector("button") as HTMLButtonElement;
+            const audio = this.querySelector("audio") as HTMLAudioElement;
+            const musicIcon = button.querySelector("#icon-unmuted");
+            const muteIcon = button.querySelector("#icon-muted");
+
+            function update(muted: boolean) {
+                if (muted) {
+                    musicIcon?.classList.add("hidden");
+                    muteIcon?.classList.remove("hidden");
+                } else {
+                    musicIcon?.classList.remove("hidden");
+                    muteIcon?.classList.add("hidden");
+                }
+            }
+
+            // not bothered to make a slider
+            audio.volume = 0.2;
+
+            const savedMuted = localStorage.getItem("muted");
+            const isMuted = savedMuted === null ? true : savedMuted == "true";
+
+            audio.muted = isMuted;
+            update(isMuted);
+
+            button.addEventListener("click", () => {
+                if (audio) {
+                    audio.muted = !audio.muted;
+                    update(audio.muted);
+                    localStorage.setItem("muted", String(audio.muted));
+                }
+            });
+        }
+    }
+
+    customElements.define("astro-music-toggle", MusicToggle);
+</script>

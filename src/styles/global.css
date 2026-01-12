@@ -2,6 +2,7 @@
 
 .frosted-glass {
     @apply backdrop-blur-md bg-white/10 border border-white/20;
+    @apply hover:bg-white/15;
     @apply focus:border-white/40 focus:bg-white/20;
     @apply transition-all
 }
