@@ -1,3 +1,7 @@
+---
+import Search from "./icons/search.astro";
+---
+
 <astro-search class="w-full max-w-2xl">
     <form class="relative">
         <input
@@ -11,17 +15,7 @@
             aria-label="Search"
             class="absolute top-1/2 transform -translate-y-1/2 right-4 focus:outline-none hover:cursor-pointer"
         >
-            <svg
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M10 2.5a7.5 7.5 0 0 1 5.964 12.048l4.743 4.745a1 1 0 0 1-1.32 1.497l-.094-.083-4.745-4.743A7.5 7.5 0 1 1 10 2.5Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"
-                    fill="#ffffff"></path>
-            </svg>
+            <Search />
         </button>
     </form>
 </astro-search>
@@ -36,7 +30,7 @@
                 e.preventDefault();
                 const query = searchInput.value.trim();
                 if (query) {
-                    window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    window.location.href = `https://searx.7sref/search?q=${encodeURIComponent(query)}`;
                 }
             });
         }
