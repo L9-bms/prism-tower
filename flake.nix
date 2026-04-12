@@ -73,19 +73,7 @@
         });
 
       nixosModules.default =
-        {
-          config,
-          pkgs,
-          lib,
-          ...
-        }:
-        let
-          cfg = config.services.prism-tower;
-          prismTowerPkg = self.lib.mkPrismTower {
-            inherit pkgs;
-            services = cfg.services;
-          };
-        in
+        { lib, ... }:
         {
           options.services.prism-tower = {
             enable = lib.mkEnableOption "Prism Tower dashboard";
@@ -109,20 +97,6 @@
                   };
                 }
               );
-            };
-          };
-
-          config = lib.mkIf cfg.enable {
-            services.caddy.virtualHosts."prism.tower.7sref" = {
-              extraConfig = ''
-                tls {
-                  issuer internal {
-                    ca 7sref_ca
-                  }
-                }
-                root * ${prismTowerPkg}
-                file_server
-              '';
             };
           };
         };
