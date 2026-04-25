@@ -2,6 +2,18 @@
 import SearchBarIsland from "./SearchBar.tsx";
 
 const searchUrl = import.meta.env.SEARCH_URL;
+
+interface Link {
+    name: string;
+    url: string;
+}
+
+const services: Link[] = (await import("../../public/services.json")).default;
+const links: Link[] = (await import("../../public/links.json")).default;
 ---
 
-<SearchBarIsland searchUrl={searchUrl} client:load />
+<SearchBarIsland
+    searchUrl={searchUrl}
+    links={[...services, ...links]}
+    client:load
+/>

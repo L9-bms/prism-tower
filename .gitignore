@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # thing
 public/services.json
+public/links.json
 
 # Ignore build outputs from performing a nix-build or `nix build` command
 result

@@ -12,8 +12,12 @@
     "@astrojs/preact": "^5.1.2",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.9",
+    "fuse.js": "^7.3.0",
     "preact": "^10.29.1",
     "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.13"
   },
   "pnpm": {
     "overrides": {
