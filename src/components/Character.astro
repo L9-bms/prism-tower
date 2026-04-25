@@ -1,4 +1,6 @@
 ---
+import CharacterIsland from "./Character.tsx";
+
 const images = Object.keys(
     import.meta.glob("/public/characters/*.png", {
         eager: true,
@@ -6,15 +8,4 @@ const images = Object.keys(
 ).map((path) => path.replace("/public", ""));
 ---
 
-<div class="fixed bottom-0 right-0 z-10">
-    <img
-        id="character-img"
-        alt=""
-        class="h-48 md:h-64 lg:h-80 object-contain opacity-80"
-    />
-</div>
-
-<script is:inline define:vars={{ images }}>
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    document.getElementById("character-img").src = randomImage;
-</script>
+<CharacterIsland images={images} client:load />

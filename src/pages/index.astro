@@ -1,10 +1,10 @@
 ---
 import Background from "../components/Background.astro";
-import Clock from "../components/Clock.astro";
+import Clock from "../components/Clock";
 import SearchBar from "../components/SearchBar.astro";
 import Services from "../components/Services.astro";
 import Character from "../components/Character.astro";
-import MusicToggle from "../components/MusicToggle.astro";
+import MusicToggle from "../components/MusicToggle";
 
 import "../styles/global.css";
 ---
@@ -22,11 +22,11 @@ import "../styles/global.css";
 		<div
 			class="relative flex flex-col items-center py-12 px-8 md:px-12 gap-12"
 		>
-			<Clock />
+			<Clock client:load />
 			<SearchBar />
 			<Services />
 		</div>
 		<Character />
-		<MusicToggle />
+		<MusicToggle client:only />
 	</body>
 </html>

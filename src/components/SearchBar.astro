@@ -1,47 +1,7 @@
 ---
-import Search from "./icons/search.astro";
+import SearchBarIsland from "./SearchBar.tsx";
 
 const searchUrl = import.meta.env.SEARCH_URL;
 ---
 
-<astro-search-bar class="w-full max-w-2xl" data-search-url={searchUrl}>
-    <form class="relative">
-        <input
-            type="text"
-            placeholder="Search..."
-            autofocus
-            class="w-full px-6 py-3 rounded-full focus:outline-none frosted-glass"
-        />
-        <button
-            type="submit"
-            aria-label="Search"
-            class="absolute top-1/2 transform -translate-y-1/2 right-4 focus:outline-none hover:cursor-pointer"
-        >
-            <Search />
-        </button>
-    </form>
-</astro-search-bar>
-
-<script>
-    class SearchBar extends HTMLElement {
-        connectedCallback() {
-            const searchForm = this.querySelector("form") as HTMLFormElement;
-            const searchInput = this.querySelector("input") as HTMLInputElement;
-            const searchUrl = this.dataset.searchUrl;
-
-            searchForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const query = searchInput.value.trim();
-                if (query) {
-                    const url = new URL(
-                        searchUrl ?? "https://google.com/search",
-                    );
-                    url.searchParams.set("q", query);
-                    window.location.href = url.toString();
-                }
-            });
-        }
-    }
-
-    customElements.define("astro-search-bar", SearchBar);
-</script>
+<SearchBarIsland searchUrl={searchUrl} client:load />
