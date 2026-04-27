@@ -7,22 +7,26 @@
   outputs =
     { self, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ flake-parts.flakeModules.easyOverlay ];
       systems = [ "x86_64-linux" ];
       perSystem =
         let
           revision = toString (self.shortRev or self.dirtyShortRev or self.lastModified or "unknown");
         in
-        { pkgs, ... }:
+        { config, pkgs, ... }:
         {
-          devShells = pkgs.mkShell {
+          devShells.default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               nodejs
-              nodePackages.pnpm_10
+              corepack
             ];
           };
 
-          # Use: inputs.prism-tower.packages.${system}.default.override
-          packages.default = pkgs.callPackage ./package.nix { inherit revision; };
+          packages.prism-tower = pkgs.callPackage ./package.nix { inherit revision; };
+
+          overlayAttrs = {
+            inherit (config.packages) prism-tower;
+          };
         };
     };
 }
