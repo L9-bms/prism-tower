@@ -23,6 +23,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+.vscode/
+
 # thing
 public/services.json
 public/links.json
@@ -33,4 +35,4 @@ result-*
 
 # Ignore automatically generated direnv output
 .direnv
-.envrc
+/.envrc

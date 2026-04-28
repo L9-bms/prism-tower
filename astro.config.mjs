@@ -7,13 +7,13 @@ import { defineConfig, passthroughImageService } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-    vite: {
-        plugins: [tailwindcss()],
-    },
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
-    image: {
-        service: passthroughImageService(),
-    },
+  image: {
+    service: passthroughImageService(),
+  },
 
-    integrations: [preact()],
+  integrations: [preact()],
 });

@@ -2,9 +2,9 @@
 import CharacterIsland from "./Character.tsx";
 
 const images = Object.keys(
-    import.meta.glob("/public/characters/*.png", {
-        eager: true,
-    }),
+  import.meta.glob("/public/characters/*.png", {
+    eager: true,
+  }),
 ).map((path) => path.replace("/public", ""));
 ---
 
